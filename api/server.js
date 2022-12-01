@@ -1,38 +1,68 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-
+const express = require("express");
+const cors = require("cors");
 const app = express();
+const db = require("./models");
+const dbConfig = require("./config/db.config");
+const Role = db.role;
+
+
+var corsOptions = {
+  origin: "http://localhost:8081"
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
-app.use(cors());
 
-mongoose.connect('mongodb+srv://Terencyl:VintHerbeA7rbz@vintherbe.r6x3bwq.mongodb.net/?retryWrites=true&w=majority', 
-{
+app.use(express.urlencoded({ extended: true }));
+
+//database
+db.mongoose
+  .connect(`${dbConfig.DB}`, {
     useNewUrlParser: true,
     useUnifiedTopology: true
-})  
-    .then(() => console.log("Connected to database"))
-    .catch(console.error);
+  })
+  .then(() => {
+    console.log("Successfully connect to MongoDB.");
+    initial();
+  })
+  .catch(err => {
+    console.error("Connection error", err);
+    process.exit();
+  });
 
-const Plant = require('./models/Plant');
+//routes
+require("./routes/auth.routes")(app);
+require("./routes/user.routes")(app);
 
-app.get('/plants', async (req, res) => {
-    const plants = await Plant.find();
-
-    res.json(plants);
+//port
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}.`);
 });
 
-app.post('/plant/new', (req, res) => {
-    const plant = new Todo({
-        text: req.body.text,
-        price: req.body.price,
-        kind: req.body.kind
-    })
+function initial() {
+  Role.estimatedDocumentCount((err, count) => {
+    if (!err && count === 0) {
+      new Role({
+        name: "user"
+      }).save(err => {
+        if (err) {
+          console.log("error", err);
+        }
 
-    plant.save();
+        console.log("Successfully added 'user' to roles collection");
+      });
 
-    res.json(plant);
-});
+      new Role({
+        name: "admin"
+      }).save(err => {
+        if (err) {
+          console.log("error", err);
+        }
 
-app.listen(3001, () => console.log("Server started on port 3001"));
+        console.log("Successfully added 'admin' to roles collection");
+      });
+    }
+  });
+}
