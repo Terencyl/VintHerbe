@@ -14,11 +14,11 @@
     font-size: 3rem;
 }
 
-.sign-up {
-    background: url("/src/images/signup-bg.jpg");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    color: #fff;
-    font-size: 100px;
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.mr-20 {
+    margin-right: 20px !important;
 }

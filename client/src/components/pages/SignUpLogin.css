@@ -1,40 +1,26 @@
-@import url("https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700,800");
-
 * {
     box-sizing: border-box;
 }
-body {
-    background: #73b36d;
-    min-height: 100vh;
-    display: flex;
-    font-weight: 400;
-    font-family: "Fira Sans", sans-serif;
-}
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-label,
-span {
-    font-weight: 500;
-    font-family: "Fira Sans", sans-serif;
+.SignUp,
+.Login {
+    font-family: sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    height: 100vh;
 }
 
 body,
 html,
 .SignUp,
+.Login,
 #root,
 .auth-wrapper {
     width: 100%;
     height: 100%;
-}
-
-.navbar-light {
-    background-color: #ffffff;
-    box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
 }
 
 .auth-wrapper {
@@ -66,12 +52,8 @@ html,
     padding-bottom: 20px;
 }
 
-.custom-control-label {
-    font-weight: 400;
-}
-
-.forgot-password,
-.forgot-password a {
+.already-signedin,
+.no-account {
     text-align: right;
     font-size: 13px;
     padding-top: 10px;
@@ -79,6 +61,46 @@ html,
     margin: 0;
 }
 
-.forgot-password a {
-    color: #167bff;
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.form-items {
+    margin-bottom: 10px;
+}
+
+input[placeholder] {
+    display: flex;
+    border-radius: 10px;
+    min-width: 100%;
+    padding: 5px;
+    height: 5vh;
+}
+
+button[type="submit"] {
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    background: #73b36d;
+    border: 1px solid #73b36d;
+    color: #fff;
+    padding: 10px 20px;
+}
+
+.submit-btn {
+    position: relative;
+    color: #fff;
+    border-radius: 10px;
+    min-width: 100%;
+}
+
+.submit-btn:focus {
+    outline-color: transparent;
+    outline-style: solid;
+    box-shadow: 0 0 0 4px #ffffff;
+}
+
+.submit-btn:active {
+    background-color: #5b9156;
 }
