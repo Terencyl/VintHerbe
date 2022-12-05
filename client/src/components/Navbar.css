@@ -33,6 +33,10 @@
     align-items: center;
 }
 
+.navbar-logo:hover {
+    color: #fff;
+}
+
 .fa-typo3 {
     margin-left: 0.5rem;
     font-size: 1.8rem;
@@ -112,9 +116,9 @@
     }
 
     .nav-links:hover {
+        margin-right: 5px;
         background-color: #fff;
         color: #242424;
-        border-radius: 0;
     }
 
     .navbar-logo {

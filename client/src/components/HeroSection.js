@@ -7,9 +7,11 @@ function HeroSection() {
         <div className="hero-container">
             <h1>Welcome to VintHerbe</h1>
             <p>The place where your ideas florish</p>
-            <a href="/sign-up" class="btn btn-light" role="button">
-                GET STARTED
-            </a>
+            <div class="d-grid gap-2 d-md-block">
+                <a href="/sign-up" class="btn btn-light" role="button">
+                    GET STARTED
+                </a>
+            </div>
         </div>
     );
 }
