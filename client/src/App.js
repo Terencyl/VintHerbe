@@ -11,20 +11,20 @@ import Login from "./components/pages/Login";
 import Products from "./components/pages/Products";
 
 function App() {
-    return (
-        <>
-            <BrowserRouter>
-                <Navbar />
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/products" element={<Products />} />
-                    <Route path="/sign-up" element={<SignUp />} />
-                    <Route path="/login" element={<Login />} />
-                </Routes>
-                <Footer />
-            </BrowserRouter>
-        </>
-    );
+  return (
+    <>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
+    </>
+  );
 }
 
 export default App;
