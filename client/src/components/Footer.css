@@ -108,7 +108,6 @@
     align-items: center;
     width: 90%;
     max-width: 1000px;
-    margin: 40px auto 0 auto;
 }
 
 .social-icons {
@@ -118,16 +117,23 @@
     width: 120px;
 }
 
+.social-icons :hover {
+    color: #fff;
+}
+
 .logo {
     color: #fff;
-    justify-self: start;
-    margin-left: 20px;
     cursor: pointer;
     text-decoration: none;
     font-size: 2rem;
     display: flex;
     align-self: center;
     margin-bottom: 16px;
+    margin-left: 3.2rem;
+}
+
+.logo:hover {
+    color: #fff;
 }
 
 .website-rights {

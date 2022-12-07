@@ -2,7 +2,7 @@
     box-sizing: border-box;
 }
 
-.SignUp,
+.Register,
 .Login {
     font-family: sans-serif;
     display: flex;
@@ -15,7 +15,7 @@
 
 body,
 html,
-.SignUp,
+.Register,
 .Login,
 #root,
 .auth-wrapper {
@@ -52,7 +52,7 @@ html,
     padding-bottom: 20px;
 }
 
-.already-signedin,
+.already-registered,
 .no-account {
     text-align: right;
     font-size: 13px;
