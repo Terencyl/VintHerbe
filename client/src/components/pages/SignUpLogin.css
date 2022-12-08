@@ -105,6 +105,6 @@ button[type="submit"] {
     background-color: #5b9156;
 }
 
-p {
+form > p {
     color: red;
 }

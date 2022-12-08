@@ -58,20 +58,34 @@ function Navbar() {
                             </Link>
                         </li>
                         {auth._id ? (
-                            <li className="nav-item">
-                                <Link
-                                    className="nav-links"
-                                    onClick={() => {
-                                        closeMobileMenu();
-                                        dispatch(logoutUser(null));
-                                        toast.warning("Logged out", {
-                                            position: "bottom-left",
-                                        });
-                                    }}
-                                >
-                                    Logout
-                                </Link>
-                            </li>
+                            <>
+                                {auth.isAdmin ? (
+                                    <li className="nav-item">
+                                        <Link
+                                            to="/admin/products"
+                                            className="nav-links"
+                                            onClick={closeMobileMenu}
+                                        >
+                                            Admin
+                                        </Link>
+                                    </li>
+                                ) : null}
+
+                                <li className="nav-item">
+                                    <Link
+                                        className="nav-links"
+                                        onClick={() => {
+                                            closeMobileMenu();
+                                            dispatch(logoutUser(null));
+                                            toast.warning("Logged out", {
+                                                position: "bottom-left",
+                                            });
+                                        }}
+                                    >
+                                        Logout
+                                    </Link>
+                                </li>
+                            </>
                         ) : (
                             <>
                                 <li className="nav-item">
