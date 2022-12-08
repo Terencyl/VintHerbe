@@ -17,7 +17,7 @@ router.post("/", async (req, res) => {
     if (error) return res.status(400).send(error.details[0].message);
 
     let user = await User.findOne({ email: req.body.email });
-    if (user) return res.status(400).send("Email already in use");
+    if (user) return res.status(400).send("Crede");
 
     const { name, email, password } = req.body;
 

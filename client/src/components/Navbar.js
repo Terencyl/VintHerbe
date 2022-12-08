@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import { logoutUser } from "../slices/authSlice";
 import "./Navbar.css";
 
 function Navbar() {
+    const auth = useSelector((state) => state.auth);
+    const dispatch = useDispatch();
+
     const [click, setClick] = useState(false);
     //eslint-disable-next-line
     const [button, setButton] = useState(true);
@@ -19,11 +24,12 @@ function Navbar() {
         }
     };
 
-    const { cartTotalQuantity } = useSelector((state) => state.cart);
-
     useEffect(() => {
         showButton();
     }, []);
+
+    //To display number of items in cart in the Navbar
+    const { cartTotalQuantity } = useSelector((state) => state.cart);
 
     window.addEventListener("resize", showButton);
 
@@ -51,25 +57,43 @@ function Navbar() {
                                 Home
                             </Link>
                         </li>
-                        <li className="nav-item">
-                            <Link
-                                to="/login"
-                                className="nav-links"
-                                onClick={closeMobileMenu}
-                            >
-                                Login
-                            </Link>
-                        </li>
-
-                        <li>
-                            <Link
-                                to="/sign-up"
-                                className="nav-links"
-                                onClick={closeMobileMenu}
-                            >
-                                Sign Up
-                            </Link>
-                        </li>
+                        {auth._id ? (
+                            <li className="nav-item">
+                                <Link
+                                    className="nav-links"
+                                    onClick={() => {
+                                        closeMobileMenu();
+                                        dispatch(logoutUser(null));
+                                        toast.warning("Logged out", {
+                                            position: "bottom-left",
+                                        });
+                                    }}
+                                >
+                                    Logout
+                                </Link>
+                            </li>
+                        ) : (
+                            <>
+                                <li className="nav-item">
+                                    <Link
+                                        to="/login"
+                                        className="nav-links"
+                                        onClick={closeMobileMenu}
+                                    >
+                                        Login
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link
+                                        to="/register"
+                                        className="nav-links"
+                                        onClick={closeMobileMenu}
+                                    >
+                                        Sign Up
+                                    </Link>
+                                </li>
+                            </>
+                        )}
                         <li>
                             <Link
                                 to="/cart"

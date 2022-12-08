@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
     addToCart,
     clearCart,
@@ -12,7 +12,9 @@ import "./Cart.css";
 
 function Cart() {
     const cart = useSelector((state) => state.cart);
+    const auth = useSelector((state) => state.auth);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(getSubtotal());
@@ -115,7 +117,16 @@ function Cart() {
                                     ${cart.cartTotalAmount}
                                 </span>
                             </div>
-                            <button>Checkout</button>
+                            {auth._id ? (
+                                <button>Checkout</button>
+                            ) : (
+                                <button
+                                    className="cart-login"
+                                    onClick={() => navigate("/login")}
+                                >
+                                    Login to Checkout
+                                </button>
+                            )}
                             <div className="shop-redirect-continue">
                                 <Link to="/">
                                     <span>Continue shopping !</span>

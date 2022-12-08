@@ -1,6 +1,6 @@
 import React from "react";
 import "../../App.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useGetAllProductsQuery } from "../../slices/productsApi";
 import { addToCart } from "../../slices/cartSlice";
 import HeroSection from "../HeroSection";
@@ -8,9 +8,6 @@ import Footer from "../Footer";
 
 function Home() {
     const { data, error, isLoading } = useGetAllProductsQuery();
-    const auth = useSelector((state) => state.auth);
-
-    console.log(auth);
 
     const dispatch = useDispatch();
 

@@ -6,6 +6,7 @@ const initialState = {
     status: null,
 };
 
+//Fetch the products available on the website
 export const productsFetch = createAsyncThunk(
     "products/productsFetch",
     async () => {

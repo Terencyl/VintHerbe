@@ -2,7 +2,7 @@
     box-sizing: border-box;
 }
 
-.Register,
+.SgnUp,
 .Login {
     font-family: sans-serif;
     display: flex;
@@ -15,7 +15,7 @@
 
 body,
 html,
-.Register,
+.SignUp,
 .Login,
 #root,
 .auth-wrapper {
@@ -103,4 +103,8 @@ button[type="submit"] {
 
 .submit-btn:active {
     background-color: #5b9156;
+}
+
+p {
+    color: red;
 }

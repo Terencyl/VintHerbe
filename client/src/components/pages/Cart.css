@@ -140,6 +140,11 @@
     cursor: pointer;
 }
 
+.cart-checkout .cart-login {
+    background-color: orange;
+    color: white;
+}
+
 .shop-redirect-continue,
 .shop-redirect-start {
     margin-top: 1rem;
