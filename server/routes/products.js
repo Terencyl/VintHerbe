@@ -20,7 +20,7 @@ router.post("/", isAdmin, async (req, res) => {
                     image: uploadRes,
                 });
                 const savedProduct = await product.save();
-                res.statusCode(200).send(savedProduct);
+                res.status(200).send(savedProduct);
             }
         }
     } catch (err) {
@@ -49,6 +49,7 @@ router.get("/find/:id", async (req, res) => {
     }
 });
 
+//Delete a product
 router.delete("/:id", isAdmin, async (req, res) => {
     try {
         const product = await Product.findById(req.params.id);
@@ -59,18 +60,71 @@ router.delete("/:id", isAdmin, async (req, res) => {
             const destroyResponse = await cloudinary.uploader.destroy(
                 product.image.public_id
             );
-        }
-
-        if (destroyResponse) {
-            const deletedProduct = await Product.findByIdAndDelete(
-                req.params.id
-            );
-            res.status(200).send(deletedProduct);
+            if (destroyResponse) {
+                const deletedProduct = await Product.findByIdAndDelete(
+                    req.params.id
+                );
+                res.status(200).send(deletedProduct);
+            }
         } else {
             console.log("Failed to delete product image");
         }
     } catch (err) {
         res.status(500).send(err);
+    }
+});
+
+//Edit a product
+router.put("/:id", isAdmin, async (req, res) => {
+    //If the image exists
+
+    if (req.body.productImg) {
+        try {
+            //destroy it
+            const destroyResponse = await cloudinary.uploader.destroy(
+                req.body.product.image.public_id
+            );
+            if (destroyResponse) {
+                //upload new image
+                const uploadedResponse = await cloudinary.uploader.upload(
+                    req.body.productImg,
+                    {
+                        upload_preset: "VintHerbe",
+                    }
+                );
+                if (uploadedResponse) {
+                    //update product in DB
+                    const updatedProduct = await Product.findByIdAndUpdate(
+                        req.params.id,
+                        {
+                            $set: {
+                                ...req.body.product,
+                                image: uploadedResponse,
+                            },
+                        },
+                        { new: true }
+                    );
+
+                    res.status(200).send(updatedProduct);
+                }
+            }
+        } catch (err) {
+            res.status(500).send(err);
+        }
+    } else {
+        //The image doesn't exist, we update the product in DB
+        try {
+            const updatedProduct = await Product.findByIdAndUpdate(
+                req.params.id,
+                {
+                    $set: req.body.product,
+                },
+                { new: true }
+            );
+            res.status(200).send(updatedProduct);
+        } catch (err) {
+            res.status(500).send(err);
+        }
     }
 });
 

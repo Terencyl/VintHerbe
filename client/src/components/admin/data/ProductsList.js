@@ -1,13 +1,18 @@
 import * as React from "react";
 import styled from "styled-components";
 import { DataGrid } from "@mui/x-data-grid";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { productsDelete } from "../../../slices/productsSlice";
+import EditProduct from "../EditProduct";
 
 export default function ProductsList() {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const { items } = useSelector((state) => state.products);
-
+    const handleDelete = (id) => {
+        dispatch(productsDelete(id));
+    };
     const rows =
         items &&
         items.map((item) => {
@@ -38,7 +43,7 @@ export default function ProductsList() {
         {
             field: "desc",
             headerName: "Description",
-            width: 600,
+            width: 200,
         },
         {
             field: "price",
@@ -49,18 +54,25 @@ export default function ProductsList() {
             field: "actions",
             headerName: "Actions",
             sortable: false,
-            width: 170,
+            width: 200,
             renderCell: (params) => {
                 return (
                     <Actions>
-                        <Delete>Delete</Delete>
-                        <View
+                        <button
+                            class="btn btn-danger"
+                            onClick={() => handleDelete(params.row.id)}
+                        >
+                            Delete
+                        </button>
+                        <EditProduct productId={params.row.id} />
+                        <button
+                            class="btn btn-success"
                             onClick={() =>
                                 navigate(`/product/${params.row.id}`)
                             }
                         >
                             View
-                        </View>
+                        </button>
                     </Actions>
                 );
             },
@@ -75,6 +87,7 @@ export default function ProductsList() {
                 pageSize={5}
                 rowsPerPageOptions={[5]}
                 checkboxSelection
+                disableSelectionOnClick
             />
         </div>
     );
@@ -98,12 +111,4 @@ const Actions = styled.div`
         border-radius: 3px;
         cursor: pointer;
     }
-`;
-
-const Delete = styled.button`
-    background-color: rgb(255, 77, 73);
-`;
-
-const View = styled.button`
-    background-color: rgb(114, 225, 40);
 `;

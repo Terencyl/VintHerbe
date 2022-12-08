@@ -44,4 +44,38 @@ $ npm install
 $ npm start
 ```
 
-6. You should now have the website opened !
+6. You should now have the website opened.
+7. You can debug the web app with `Redux DevTools`
+    - On Chrome, install [redux-devtools-extension](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd)
+    - On Firefox, install [redux-devtools-add-ons](https://addons.mozilla.org/en-US/firefox/addon/reduxdevtools/)
+
+## File structure
+
+#### `client` - Holds the client application
+
+-   #### `node_modules` - Contains installed dependencies
+-   #### `public` - This holds all of the static files
+-   #### `src`
+    -   #### `components` - This folder holds components
+        -   #### `admin` - Contains the part of the website hidden behind admin authentification
+        -   #### `pages` - This folder holds all of the different pages accessible to the user
+    -   #### `images` - This folder contains the HeroSection background image
+    -   #### `slices` - This folder contains the collection of all of the slices used in the website
+    -   #### `App.js` - This is what renders all of our browser routes and different views
+    -   #### `index.js` - This is what renders the react app by rendering App.js.
+-   #### .gitignore - Tells git which files should be ignored
+-   #### `package.json` - Defines npm behaviors and packages for the client
+
+#### `server` - Holds the server application
+
+-   #### `middleware` - This holds our configuration files, like mongoDB uri
+-   #### `models` - Contains schema for our MongoDB
+-   #### `node_modules` - Contains installed dependencies
+-   #### `routes` - This holds all of our HTTP to URL path associations for each unique url
+-   #### `utils` - This holds a set of utility functions, such as importing cloudinary for our images
+-   #### `.env` - Used to declare environment variables
+-   #### `package.json` - Defines npm behaviors like the scripts on startup
+-   #### `products.js` - Contains hard-coded products (not used anymore)
+-   #### `server.js` - Defines npm behaviors and packages for the client
+
+#### `README` - This file!
