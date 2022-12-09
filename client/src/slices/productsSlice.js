@@ -65,7 +65,7 @@ export const productsEdit = createAsyncThunk(
     async (values) => {
         try {
             const response = await axios.put(
-                `${url}/products/${values.product.id}`,
+                `${url}/products/${values.product._id}`,
                 values,
                 setHeaders()
             );
@@ -113,7 +113,7 @@ const productsSlice = createSlice({
         },
         [productsEdit.fulfilled]: (state, action) => {
             const updatedProducts = state.items.map((product) =>
-                product.id === action.payload.id ? action.payload : product
+                product._id === action.payload._id ? action.payload : product
             );
             state.items = updatedProducts;
             state.editStatus = "success";
